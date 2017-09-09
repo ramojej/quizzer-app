@@ -2,6 +2,10 @@ $(document).ready(function() {
 
     (function startQuiz() {
 
+        this.settings = {
+            results: []
+        };
+
         this.loadQuiz = function() {
 
             $('.panel_one h1').show('drop', 500, function() {
@@ -67,7 +71,8 @@ $(document).ready(function() {
 
                 var next = $(this).data('next');
                 if(validateSelection($(this))) {
-                    showPanel(next);    
+                    showPanel(next);
+                    showProgressAndStore(next);    
                 }
 
             });
@@ -84,6 +89,19 @@ $(document).ready(function() {
                 });
                 return false;
             }
+
+        };
+
+        this.showProgressAndStore = function(panel) {
+            $('.progress .bar').animate({width: '+=25%'}, 500);
+
+            var options = $('.div[data-panel="'+ (panel - 1) +'"]').find('.options');
+            options.find('div').each(function(i, elem) {
+                if($(this).hasClass('active')) {
+                    settings.results.push($(this).text());
+                    console.log(settings.results)
+                }
+            });
 
         };
 
