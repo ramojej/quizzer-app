@@ -26,12 +26,24 @@ $(document).ready(function() {
                 left: '-=100px',
                 opacity: 0
             }, 500, function() {
-
+                //hide current
                 current.addClass('hidden');
+
+                //show next
+                var next = $('div[data-panel="'+ position +'"]');
+                next.removeClass('hidden');
+                showNext(next)
                 
             });
 
         };
+
+        this.showNext = function(next) {
+            var wrapper = next.find('.wrapper');
+            wrapper.fadeIn('500', function() {
+
+            });
+        }
 
         loadQuiz();
 
