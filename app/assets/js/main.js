@@ -11,9 +11,8 @@ $(document).ready(function() {
             });
 
             $('.start_quiz').on('click', function() {
-
                 showPanel(1);
-
+                listenNext();
             });
 
         }
@@ -60,6 +59,31 @@ $(document).ready(function() {
                 next.addClass('valid'); 
                 $(this).addClass('active');
             });
+
+        };
+
+        this.listenNext = function() {
+            $('.next_question').on('click', function() {
+
+                var next = $(this).data('next');
+                if(validateSelection($(this))) {
+                    showPanel(next);    
+                }
+
+            });
+        };
+
+        this.validateSelection = function($this) {
+            var parent = $this.parents().eq(1);
+
+            if(parent.hasClass('valid')) {
+                return true;
+            } else {
+                $('.error').fadeIn(300, function() {
+                    $(this).delay(1000).fadeOut(300);
+                });
+                return false;
+            }
 
         };
 
