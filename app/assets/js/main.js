@@ -68,9 +68,8 @@ $(document).ready(function() {
 
         this.listenNext = function() {
             $('.next_question').on('click', function() {
-
-                var next = $(this).data('next');
                 if(validateSelection($(this))) {
+                    var next = $(this).data('next');
                     showPanel(next);
                     showProgressAndStore(next);    
                 }
@@ -93,13 +92,13 @@ $(document).ready(function() {
         };
 
         this.showProgressAndStore = function(panel) {
-            $('.progress .bar').animate({width: '+=25%'}, 500);
+            $('.progress .bar').animate({'width': '+=25%'}, 500);
 
             var options = $('.div[data-panel="'+ (panel - 1) +'"]').find('.options');
-            options.find('div').each(function(i, elem) {
+            options.find('div').each(function(item, el) {
                 if($(this).hasClass('active')) {
                     settings.results.push($(this).text());
-                    console.log(settings.results)
+                    console.log(settings.results);
                 }
             });
 
